@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<addon addon_id="ThemeHouse_PostOnReport" title="[⌂] Post on Reported Content" version_string="1.0.1" version_id="1447261019" url="http://xf.themehouse.io/" install_callback_class="ThemeHouse_Install" install_callback_method="install" uninstall_callback_class="ThemeHouse_Install" uninstall_callback_method="uninstall">
+  <admin_navigation/>
+  <admin_permissions/>
+  <admin_style_properties/>
+  <admin_templates/>
+  <admin_template_modifications/>
+  <code_events/>
+  <code_event_listeners>
+    <listener event_id="controller_pre_dispatch" execute_order="10" callback_class="ThemeHouse_Listener_ControllerPreDispatch" callback_method="controllerPreDispatch" active="1" hint="" description=""/>
+    <listener event_id="file_health_check" execute_order="10" callback_class="ThemeHouse_PostOnReport_Listener_FileHealthCheck" callback_method="fileHealthCheck" active="1" hint="" description=""/>
+    <listener event_id="init_dependencies" execute_order="10" callback_class="ThemeHouse_Listener_InitDependencies" callback_method="initDependencies" active="1" hint="" description=""/>
+    <listener event_id="load_class" execute_order="10" callback_class="ThemeHouse_PostOnReport_Listener_LoadClass" callback_method="loadClassModel" active="0" hint="XenForo_Model_Report" description="XenForo_Model_Report (For XenForo 1.2 and above)" compatibility_switch="1"/>
+    <listener event_id="load_class" execute_order="10" callback_class="ThemeHouse_PostOnReport_Listener_LoadClass" callback_method="loadClassView" active="0" hint="XenForo_ViewAdmin_Option_ListOptions" description="XenForo_ViewAdmin_Option_ListOptions (For XenForo 1.2 and above)" compatibility_switch="1"/>
+    <listener event_id="load_class_model" execute_order="10" callback_class="ThemeHouse_PostOnReport_Listener_LoadClass" callback_method="loadClassModel" active="1" hint="" description="(For XenForo 1.1 and below)" compatibility_switch="1"/>
+    <listener event_id="load_class_view" execute_order="10" callback_class="ThemeHouse_PostOnReport_Listener_LoadClass" callback_method="loadClassView" active="1" hint="" description="(For XenForo 1.1 and below)" compatibility_switch="1"/>
+  </code_event_listeners>
+  <cron/>
+  <email_templates/>
+  <email_template_modifications/>
+  <optiongroups>
+    <group group_id="th_postOnReport" display_order="2000" debug_only="0"/>
+    <option option_id="th_postOnReport_reportIntoForumId" edit_format="callback" data_type="integer" can_backup="1">
+      <default_value/>
+      <edit_format_params>XenForo_Option_ForumChooser::renderOption</edit_format_params>
+      <sub_options/>
+      <relation group_id="discourager" display_order="520"/>
+      <relation group_id="th_postOnReport" display_order="1"/>
+    </option>
+  </optiongroups>
+  <permissions>
+    <permission_groups/>
+    <permissions/>
+    <interface_groups/>
+  </permissions>
+  <phrases>
+    <phrase title="option_group_th_postOnReport" version_id="1375144907" version_string="1.0.0"><![CDATA[Post on Reported Content by ThemeHouse]]></phrase>
+    <phrase title="option_group_th_postOnReport_description" version_id="1375144907" version_string="1.0.0"><![CDATA[Options for the Post on Reported Content by ThemeHouse add-on.]]></phrase>
+    <phrase title="option_th_postOnReport_reportIntoForumId" version_id="1375144907" version_string="1.0.0"><![CDATA[Send Reports into Forum]]></phrase>
+    <phrase title="option_th_postOnReport_reportIntoForumId_explain" version_id="1375144907" version_string="1.0.0"><![CDATA[If a forum is selected here, a thread will be posted whenever content is reported, without disabling the report center.]]></phrase>
+    <phrase title="th_reported_thread_message_postonreport" version_id="1375144907" version_string="1.0.0"><![CDATA[[url='{link}']{title}[/url] by [url='{userLink}']{username}[/url] has been reported by [url='{reporterLink}']{reporter}[/url]. Reason given:
+[quote]{reportReason}[/quote]
+
+Content being reported:
+[quote]{message}[/quote]
+{extraDetails}]]></phrase>
+    <phrase title="th_reported_thread_title_postonreport" version_id="1375144907" version_string="1.0.0"><![CDATA[Reported Content: {title}]]></phrase>
+  </phrases>
+  <route_prefixes/>
+  <style_properties/>
+  <templates/>
+  <public_template_modifications>
+    <modification template="footer" modification_key="th_copyrightNotice_postOnReport" description="Copyright notice for [⌂] Post on Reported Content" execution_order="1" enabled="1" action="callback">
+      <find><![CDATA[/{xen:phrase (?:xenforo|extra)_copyright}/]]></find>
+      <replace><![CDATA[ThemeHouse_Listener_InitDependencies::copyrightNotice]]></replace>
+    </modification>
+  </public_template_modifications>
+  <bb_code_media_sites/>
+  <bb_codes/>
+</addon>
